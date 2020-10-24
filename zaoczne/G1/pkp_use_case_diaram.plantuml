@@ -1,0 +1,27 @@
+@startuml
+
+
+actor Kasjer as P
+actor Klient as K
+actor Bank as B 
+
+rectangle PKP {
+    usecase "Kupno biletu" as kupno
+    usecase "Wydruk biletu" as wydruk
+    usecase "Płatność" as platnosc
+    usecase "Gotówka" as cash 
+    usecase "Karta" as karta
+    usecase "Autoryzacja płatności" as auth 
+}
+
+P -- kupno
+K -- kupno
+K -- platnosc
+B -- auth
+K -- auth
+
+kupno --> wydruk : <<invoke>>
+cash --|> platnosc : <<exteds>>
+karta --|> platnosc :<<extends>>
+karta --> auth : <<invoke>>
+@enduml

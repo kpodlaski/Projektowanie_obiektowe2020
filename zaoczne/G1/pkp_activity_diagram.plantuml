@@ -1,0 +1,26 @@
+@startuml
+
+(*) --> "Wywiad o punkt docelowy podróży" 
+--> "Ustalenie terminu podróży"
+--> "Sprawdzenie ceny"
+--> "Potwierdzenie chęci zakupu"
+if "Zakup" then
+    --> [TAK] "Wydruk"
+    --> "Płatność"
+    if "Forma płatności" then
+        --> [Karta] "Autoryzacja"
+        note left
+        Komunikacja z systemem bankowym
+        end note
+        --> "Wydruk potwierdzenia"
+        --> "Paragon"
+        --> "Wydanie biletu"
+        --> (*) 
+    else 
+        --> [Cash] "Pobór płatności"
+    --> "Paragon"
+    endif
+else 
+--> [NIE] "Anulowanie procesu"
+--> (*)
+@enduml
