@@ -1,0 +1,27 @@
+@startuml
+
+(*) --> "Określenie punktu deocelowego"
+--> "Określenie terminu podróży"
+--> "Potwierdzenie chęci zakupu"
+if "" then 
+    --> [TAK] "Wpis danych do systemu"
+    --> "Wydruk biletu"
+    --> "Forma płatności"
+    if "" then
+        -left-> [GOTOWKA] "Pobór płatności"
+        --> "Wydanie reszty"
+        --> "Wydanie biletu"
+        --> "Wydanie paragonu"
+        --> (*)
+    else 
+        --> [KARTA] "Autoryzacja"
+        --> "Weryfiacja w systemie bankowym"
+        --> "Wydanie biletu"
+    endif
+else 
+    --> [NIE] "Anulowanie zakupu"
+    --> (*)
+
+
+
+@enduml
