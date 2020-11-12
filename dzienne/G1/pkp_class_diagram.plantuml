@@ -1,0 +1,38 @@
+@startuml
+
+class Bilet{
+    cel 
+    termin
+    cena 
+    klasa 
+    miejsce_w_pociagu
+    czas_sprzedarzy
+}
+
+class Paragon{
+    'bilet zamieniono na asocjację z klasą Bilet
+    cena
+    VAT
+}
+
+class Kasjer{
+    ID 
+    imie
+    nazwisko
+}
+
+class Kasa{
+    stan
+    wplata()
+}
+
+class Biletomat(){
+    kupno()
+}
+
+Kasjer -- Kasa
+Bilet -- "bilet" Paragon
+Biletomat "kasa" -- Kasa
+Biletomat .. Bilet : <<create>>
+Biletomat .. Paragon : <<create>>
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+
+class Bilet{
+    miejsce_docelowe
+    siedzenie
+    termin_podrozy
+    cena 
+    czas_zakupu
+    'paragon opisane przez asocjację
+}
+
+class Paragon{
+    'bilet opisane przez asocjację
+    cena
+    vat
+}
+
+
+class Kasjer{
+
+}
+
+class Biletomat{
+    zakup()
+}
+
+class Kasa(){
+    stan
+    wplata()
+}
+
+Paragon "bilet" -- "paragon" Bilet 
+
+@enduml
