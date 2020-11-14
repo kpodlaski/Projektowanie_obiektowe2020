@@ -1,0 +1,97 @@
+@startuml
+
+class Bilet{
+    cel 
+    termin 
+    cena 
+    klasa 
+    miejsce
+}
+
+class Paragon{
+    'bilet  ta informacja jest przeniesiona do relacji assocjacji
+    cena 
+    vat
+}
+
+class Kasjer{
+    imie 
+    nazwisko
+} 
+
+class Kasa{ 
+    stan 
+    wplata()
+}
+
+class Bank{
+    autoryzacja()
+}
+
+class Rozklad_Jazdy{ 
+    wyszukaj()
+}
+
+'może być interfejs
+class Drukarka{
+    wydruk()
+}
+
+class System_sprzedarzy{
+    zakup()
+    stworz_bilet() : Bilet
+    dodaj_paragon() : Paragon
+}
+
+class Baza{
+    zapisz_dane()
+    polaczenia()
+}
+
+class Drukarka_biletow{
+    'wydruk biletu
+    wydruk() 
+}
+
+class Drukarka_paragonow{
+    'wydruk paragonu
+    wydruk() 
+}
+
+class UI{
+    wprowadz_dane()
+    wyswietl_informacje()
+}
+
+class GUI{
+
+}
+
+class WebUI{
+
+}
+
+'Terminal UI
+class Konsola {
+
+}
+
+Kasjer -- Kasa
+System_sprzedarzy -- Bank
+System_sprzedarzy *-- Kasa
+System_sprzedarzy *-- Drukarka
+System_sprzedarzy -- Baza
+UI -- System_sprzedarzy
+
+Paragon "bilet" -- Bilet
+System_sprzedarzy .. Bilet : <<create>>
+System_sprzedarzy .. Paragon : <<create>>
+
+Rozklad_Jazdy -- Baza
+Drukarka <|-- Drukarka_biletow
+Drukarka <|-- Drukarka_paragonow
+UI <|-- GUI
+UI <|-- Konsola
+UI <|-- WebUI
+
+@enduml
