@@ -1,0 +1,93 @@
+@startuml
+
+class Bilet{
+    cel 
+    termin 
+    cena 
+    klasa
+}
+
+class Paragon{
+    'bilet przeniosono na poziom asocjacji
+    cena
+    vat
+}
+
+class Potwierdzenie{
+    id_tans
+    cena
+}
+
+class Kasjer{
+    imie 
+    nazwisko
+}
+
+class Kasa{
+    suma 
+    wplata()
+}
+
+class Drukarka{
+    wydruk()
+}
+
+class Baza {
+    zapis()
+}
+
+class Bank{
+    aktywacja()
+}
+
+class SystemSprzdarzy{
+    kup_bilet()
+}
+
+class Drukarka_Biletow{
+    wyduk()
+}
+
+class Drukarka_Paragonow{
+    wyduk()
+}
+
+class Drukarka_Potwierdzen{
+    wyduk()
+}
+
+class UI{
+    wprowadzanie_danych()
+    wyświetlanie_informacji()
+}
+
+class Konsola{
+}
+
+class GUI{}
+
+class WebUI{}
+
+
+Kasa o-- Kasjer
+SystemSprzdarzy *-- Kasa
+SystemSprzdarzy *-- Drukarka
+SystemSprzdarzy -- Baza
+SystemSprzdarzy -- Bank
+UI -- SystemSprzdarzy
+Bank -- Drukarka
+
+Bank .. Potwierdzenie : <<create>>
+SystemSprzdarzy .. Bilet : <<create>>
+SystemSprzdarzy .. Paragon : <<create>>
+
+Drukarka <|-- Drukarka_Biletow
+Drukarka <|-- Drukarka_Paragonow
+Drukarka <|-- Drukarka_Potwierdzen
+
+UI <|-- Konsola
+UI <|-- GUI
+UI <|-- WebUI
+
+Paragon "bilet" -- Bilet
+@enduml
