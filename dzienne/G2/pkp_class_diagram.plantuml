@@ -21,14 +21,29 @@ class Kasjer{
 }
 
 class Biletomat{
-    zakup()
+    zakup(cel_podrozy)
+    wplata(bilet, kwota)
 }
 
-class Kasa(){
+class Kasa{
     stan
     wplata()
 }
 
-Paragon "bilet" -- "paragon" Bilet 
+class UI{}
 
+class Drukarka{}
+
+
+
+Paragon "bilet" -- "paragon" Bilet
+Biletomat -- Kasa
+Kasjer -- Kasa 
+DrukarkaParagonow --|> Drukarka
+DrukarkaBiletow --|> Drukarka
+Biletomat -- Drukarka
+UI -- Biletomat
+ConsoleUI --|> UI
+GUI --|> UI
+WebUI --|> UI
 @enduml

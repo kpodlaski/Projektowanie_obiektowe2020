@@ -1,5 +1,9 @@
 @startuml
 
+class UI {
+
+}
+
 class Bilet{
     cel 
     termin
@@ -26,8 +30,16 @@ class Kasa{
     wplata()
 }
 
-class Biletomat(){
+class Biletomat{
     kupno()
+}
+
+class Drukarka{
+    wydruk()
+}
+
+class Baza_Danych{
+
 }
 
 Kasjer -- Kasa
@@ -35,4 +47,12 @@ Bilet -- "bilet" Paragon
 Biletomat "kasa" -- Kasa
 Biletomat .. Bilet : <<create>>
 Biletomat .. Paragon : <<create>>
+UI -- Biletomat
+Biletomat o- Drukarka
+Biletomat - Baza_Danych
+
+ConsoleUI --|>UI
+GUI --|> UI
+DukarkaParagonow --|> Drukarka
+DrukarkaBiletow --|> Drukarka
 @enduml

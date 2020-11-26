@@ -1,0 +1,26 @@
+@startuml
+
+actor Klient
+note left UI: scenariusz zakupu gotówka
+activate UI
+UI -> Biletomat : dane_podrozy()
+activate Biletomat
+Biletomat -> Baza_Danych : cena(dane_podrozy)
+Biletomat -> Drukarka : wydruk()
+activate Drukarka
+return
+return
+UI -> UI : forma_platnosci()
+'"gotówka"
+UI -> UI : pobor_gotowki()
+UI --> Biletomat : wplata(kwota)
+activate Biletomat
+Biletomat -> Kasa : wplata(kwota)
+activate Kasa
+return
+Biletomat -> Kasa : reszta(cena-kwota)
+activate Kasa
+return reszta
+Biletomat -> UI: reszta, bilet
+deactivate Biletomat
+@enduml

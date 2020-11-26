@@ -1,0 +1,36 @@
+@startuml
+
+actor Klient
+actor Kasjer
+note left UI : scenariusz zakup biletu, gotówką
+
+UI -> Biletomat : zakup(cel_podrozy)
+activate Biletomat
+Biletomat -> Rozklad_Jazdy : cena_biletu()
+activate Rozklad_Jazdy
+return
+Biletomat -> Drukarka : wydruk_biletu
+activate Drukarka
+return 
+return cena
+
+UI -> UI: forma_platnosci()
+'"gotowka"
+UI -> UI: zaplata(cena)
+'kwota
+UI --> Biletomat: wplata(bilet, kwota)
+' Biletomat musi wiedzieć jaki bilet, jaka cenaitp.
+activate Biletomat
+Biletomat -> Kasa : wplata(kwota)
+activate Kasa
+return 
+Biletomat -> Kasa : reszta(cena-kwota)
+activate Kasa
+return reszta
+Biletomat -> Drukarka : wydruk_paragonu
+activate Drukarka
+return
+Biletomat -> UI: reszta, bilet, paragon
+deactivate Biletomat
+
+@enduml
