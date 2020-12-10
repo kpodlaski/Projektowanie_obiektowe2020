@@ -27,14 +27,26 @@ class Biletomat{
 
 class Kasa{
     stan
+    stan_bezgotowkowy
     wplata()
 }
 
-class UI{}
+interface Bank{
+    autoryzacja()
+}
+
+abstract class UI{}
 
 class Drukarka{}
 
+class Operacje_na_danych{
+    wyszukaj_polaczenia()
+}
 
+interface Baza_Danych{
+    informacje_o_polaczeniach
+    informacja_o_transakcjach
+}
 
 Paragon "bilet" -- "paragon" Bilet
 Biletomat -- Kasa
@@ -46,4 +58,10 @@ UI -- Biletomat
 ConsoleUI --|> UI
 GUI --|> UI
 WebUI --|> UI
+Operacje_na_danych -- Baza_Danych
+Biletomat -- Operacje_na_danych
+Kasa -- Bank
+
+Biletomat .. Bilet : <<create>>
+Biletomat .. Paragon : <<create>>
 @enduml
