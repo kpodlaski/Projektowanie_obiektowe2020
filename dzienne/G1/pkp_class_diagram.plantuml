@@ -1,6 +1,6 @@
 @startuml
 
-class UI {
+abstract class UI {
 
 }
 
@@ -27,6 +27,7 @@ class Kasjer{
 
 class Kasa{
     stan
+    stan_platnosci_bezgotowkowych
     wplata()
 }
 
@@ -38,9 +39,18 @@ class Drukarka{
     wydruk()
 }
 
-class Baza_Danych{
-
+class Dostep_do_Danych{
+wyszukaj_polaczenie()
+zapisz_transakcje()
 }
+
+interface Baza_Danych{
+}
+
+interface Bank{
+    autoryzacja()
+}
+
 
 Kasjer -- Kasa
 Bilet -- "bilet" Paragon
@@ -49,7 +59,9 @@ Biletomat .. Bilet : <<create>>
 Biletomat .. Paragon : <<create>>
 UI -- Biletomat
 Biletomat o- Drukarka
-Biletomat - Baza_Danych
+Biletomat -- Dostep_do_Danych
+Dostep_do_Danych -- Baza_Danych
+Kasa -- Bank
 
 ConsoleUI --|>UI
 GUI --|> UI
